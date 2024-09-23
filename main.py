@@ -99,6 +99,7 @@ def main():
                         print("\nA matriz coluna dos valores de Y:", matriz_Y)
 
                         matriz_X = calcularMatrizColuna(G_T, matriz_Y)
+
                         if isinstance(matriz_X, str):
                             print(matriz_X)
                         else:
