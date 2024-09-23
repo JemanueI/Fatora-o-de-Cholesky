@@ -3,22 +3,17 @@ import re
 
 
 def extrairMatrizeVetor():
-    # Solicitar ao usuário o número de equações
     n_matriz = int(input("Digite o número de equações no sistema: "))
 
-    # Inicializar a matriz de coeficientes e o vetor de constantes
     A = np.zeros((n_matriz, n_matriz))
     b = np.zeros(n_matriz)
 
-    # Preencher a matriz de coeficientes e o vetor de constantes
     for i in range(n_matriz):
         equacao = input(f"\nDigite a equação {i + 1} (ex: '2x + 3y - z = 5'): ")
 
-        # Separar os lados da equação
         esquerda, direita = equacao.split('=')
         direita = float(direita.strip())
 
-        # Extrair os coeficientes da parte esquerda
         termos = re.findall(r'([+-]?\d*\.?\d*[xyzw]?)', esquerda)
 
         for termo in termos:
@@ -35,7 +30,6 @@ def extrairMatrizeVetor():
                 coef = float(coef) if coef not in ('', '+', '-') else float(coef + '1')
                 A[i, 2] = coef
 
-        # Atribuir o valor da constante
         b[i] = direita
 
     return A, b
@@ -46,7 +40,6 @@ def verificarPositiva(matriz):
     return np.all(autovalores > 0)
 
 def calcularTriangularInferior(matriz):
-    """Realiza a fatoração de Cholesky de uma matriz positiva definida."""
     n = matriz.shape[0]
     G = np.zeros_like(matriz)
 
@@ -60,7 +53,6 @@ def calcularTriangularInferior(matriz):
     return G
 
 def transposta(matriz):
-    # Usando compreensão de lista para calcular a transposta
     return [[matriz[j][i] for j in range(len(matriz))] for i in range(len(matriz[0]))]
 
 def main():
@@ -83,18 +75,6 @@ def main():
             print("A matriz é simétrica, mas não é positiva.")
     else:
         print("Não é simétrica nem positiva.")
-
-
-
-
-
-
-
-
-
-
-
-
 
 if __name__ == '__main__':
     main()
