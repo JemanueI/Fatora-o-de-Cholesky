@@ -1,7 +1,7 @@
 import numpy as np
 import re
 
-def ler_sistema_linear():
+def sistemaLinear():
     n = int(input("Digite o número de equações (ou variáveis): "))
 
     A = []
@@ -25,7 +25,7 @@ def ler_sistema_linear():
 
     return np.array(A), np.array(b)
 
-def verificar_quadrada(matriz):
+def verificarQuadrada(matriz):
     return matriz.shape[0] == matriz.shape[1]
 def verificarPositiva(matriz):
     if not np.allclose(matriz, matriz.T):
@@ -49,10 +49,10 @@ def calcularTriangularInferior(matriz):
 def transposta(matriz):
     return [[matriz[j][i] for j in range(len(matriz))] for i in range(len(matriz[0]))]
 
-def matriz_multiplicacao(matriz1, matriz2):
+def multiplicacaoMatriz(matriz1, matriz2):
     return np.dot(matriz1, matriz2)
 
-def verificar_igualdade(matrizResultado, matrizComparacao):
+def verificarIgualdade(matrizResultado, matrizComparacao):
     return np.array_equal(matrizResultado, matrizComparacao)
 
 def calcularMatrizColuna(matriz1, matriz2):
@@ -64,7 +64,7 @@ def calcularMatrizColuna(matriz1, matriz2):
     return Y
 
 def main():
-    A, b = ler_sistema_linear()
+    A, b = sistemaLinear()
 
     print("\nMatriz A:")
     print(A)
@@ -72,12 +72,12 @@ def main():
     print("\nMatriz coluna b:")
     print(b)
 
-    if verificar_quadrada(A):
+    if verificarQuadrada(A):
         print("\nA matriz 'A' é quadrada.")
 
         if np.allclose(A, A.T):
             if verificarPositiva(A):
-                print("\nA matriz 'A' é simétrica e positiva definida.")
+                print("\nA matriz 'A' é simétrica e positiva.")
 
                 G = calcularTriangularInferior(A)
                 print("\nA matriz triangular inferior ('G'):\n", G)
@@ -85,10 +85,10 @@ def main():
                 G_T = transposta(G)
                 print("\nA matriz triangular superior ('G_T'):\n", G_T)
 
-                resultado = matriz_multiplicacao(G, G_T)
+                resultado = multiplicacaoMatriz(G, G_T)
                 print("\nA matriz resultado de 'G*G_T':\n", resultado)
 
-                if verificar_igualdade(resultado, A):
+                if verificarIgualdade(resultado, A):
                     print("\nO resultado da multiplicação é igual à matriz A.")
 
                     matriz_Y = calcularMatrizColuna(G, b)
